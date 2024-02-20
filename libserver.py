@@ -43,4 +43,27 @@ class Message:
                 
             self._write()
             
-    
+    def process_protoheader(self):
+        hdrlen = 2
+        
+        if len(self._recv_buffer) >= hdrlen:
+            self._json_header_len = struct.unpack(
+                ">H", self._recv_buffer[:hdrlen]
+            )[0]
+            self._recv_buffer = self._recv_buffer[hdrlen:]
+            
+    def process_jsonheader(self):
+        hdrlen = self._json_header_len
+        if len(self._recv_buffer) >= hdrlen:
+            self.jsonheader = self._json_decode(
+                self._recv_buffer[:hdrlen], "utf-8"
+            )
+            self._recv_buffer = self._recv_buffer[hdrlen:]
+            for reqhdr in (
+                "byteorder",
+                "content-length",
+                "content-type",
+                "content-encoding",
+            ):
+                if reqhdr not in self.jsonheader:
+                    raise ValueError(f"Missing required header {reqhdr}")
