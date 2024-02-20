@@ -32,8 +32,8 @@ The TCP Multi-Client Socket Programming project demonstrates how to create a ser
 ## Screenshots
 
 <div style="display: flex; flex-wrap: wrap; justify-content: center;">
-  <img src="src/img/pic1.png" alt="Screenshot 1" width="200" />
-  <img src="src/img/pic2.png" alt="Screenshot 2" width="200" />
+  <img src="img/pic1.png" alt="Screenshot 1" width="200" />
+  <img src="img/pic2.png" alt="Screenshot 2" width="200" />
 </div>
 
 ## Requirements
