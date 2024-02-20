@@ -1,4 +1,5 @@
-# TCP Multi-Client Socket Programming
+![Screenshot](https://user-images.githubusercontent.com/97472180/168478765-e3f92291-89cd-4ca5-9f8b-a7734a50229a.PNG)
+<img src="https://user-images.githubusercontent.com/97472180/168478765-e3f92291-89cd-4ca5-9f8b-a7734a50229a.PNG" alt="Screenshot" width="600">
 
 ## Overview
 The TCP Multi-Client Socket Programming project demonstrates how to create a server application that supports multiple client connections using TCP/IP sockets. This project provides a simple yet effective example of concurrent communication between a server and multiple clients over a network.
