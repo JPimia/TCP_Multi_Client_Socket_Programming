@@ -4,7 +4,7 @@ import selectors
 import types
 
 sel = selectors.DefaultSelector()
-messages = [b"message 1 from client", b"message 2 from client"]
+messages = [b"message 1 from client. ", b"message 2 from client. "]
 
 def start_connections(host, port, num_conns):
     server_addr = (host, port)
