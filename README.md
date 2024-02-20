@@ -29,6 +29,13 @@ The TCP Multi-Client Socket Programming project demonstrates how to create a ser
    - Once the server is running and clients are connected, the server will accept and process client requests.
    - Clients can send messages to the server, and the server will echo the received messages back to the clients.
 
+## Screenshots
+
+<div style="display: flex; flex-wrap: wrap; justify-content: center;">
+  <img src="file:///path/to/your/desktop/projekti%20kuvia/pic1.png" alt="Screenshot 1" width="200" />
+  <img src="file:///path/to/your/desktop/projekti%20kuvia/pic2.png" alt="Screenshot 2" width="200" />
+</div>
+
 ## Requirements
 - Python 3.x
 - No additional libraries or dependencies required.
