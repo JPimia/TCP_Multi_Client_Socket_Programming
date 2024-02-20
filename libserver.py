@@ -78,7 +78,6 @@ class Message:
             self.request = self._json_encode(data, encoding)
             print(f"Received request {self.request!r} from {self.addr}")
         else:
-            # Binary or unknown content-type
             self.request = data
             print(
                 f"Received {self.jsonheader['content-type']} "
@@ -91,8 +90,21 @@ class Message:
         if self.jsonheader["content-type"] == "text/json":
             response = self._create_response_json_content()
         else:
-            # Binary or unknown content-type
             response = self._create_response_binary_content()
         message = self._create_message(**response)
         self.response_created = True
         self._send_buffer += message
+        
+    def _write(self):
+        if self._send_buffer:
+            print(f"Sending {self._send_buffer!r} to {self.addr}")
+            try:
+                # Should be ready to write
+                sent = self.sock.send(self._send_buffer)
+            except BlockingIOError:
+                pass
+            else:
+                self._send_buffer = self._send_buffer[sent:]
+                # Close when the buffer is drained
+                if sent and not self._send_buffer:
+                    self.close()
