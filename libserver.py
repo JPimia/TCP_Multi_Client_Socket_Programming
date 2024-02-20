@@ -67,3 +67,32 @@ class Message:
             ):
                 if reqhdr not in self.jsonheader:
                     raise ValueError(f"Missing required header {reqhdr}")
+                
+    def process_request(self):
+        content_len = self.jsonheader["content-length"]
+        if not len(self._recv_buffer) >= content_len:
+            return
+        data = self._recv_buffer[content_len:]
+        if self.jsonheader["content-type"] == "text/json":
+            encoding = self.jsonheader["content-encoding"]
+            self.request = self._json_encode(data, encoding)
+            print(f"Received request {self.request!r} from {self.addr}")
+        else:
+            # Binary or unknown content-type
+            self.request = data
+            print(
+                f"Received {self.jsonheader['content-type']} "
+                f"request from {self.addr}"
+            )
+        # Set selector to listen for write events, we're done reading.
+        self._set_selector_events_mask("w")
+        
+    def create_response(self):
+        if self.jsonheader["content-type"] == "text/json":
+            response = self._create_response_json_content()
+        else:
+            # Binary or unknown content-type
+            response = self._create_response_binary_content()
+        message = self._create_message(**response)
+        self.response_created = True
+        self._send_buffer += message
