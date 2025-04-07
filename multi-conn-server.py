@@ -5,8 +5,6 @@ import types
 
 sel = selectors.DefaultSelector()
 
-
-
 def accept_wrapper(sock):
     conn, addr = sock.accept()
     print(f"Accepted connection from {addr}")
@@ -57,4 +55,3 @@ except KeyboardInterrupt:
 finally:
     sel.close()
     
-
